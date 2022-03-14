@@ -1,5 +1,5 @@
 # medium-clone
-This is a Medium clone to study web front-end development.
+This is an adapted [Medium](https://medium.com) clone to study web front-end development.
 Its purpose is to improve my web FE skills.
 
 I used Next.js, React, Typescript, SSR, SSG, Tailwind.
