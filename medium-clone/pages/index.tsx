@@ -2,8 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Header from '../components/Header';
 import HomeBanner from '../components/HomeBanner';
+import Posts from '../components/Posts';
+import { Post } from '../types';
 
-const Home: NextPage = () => {
+interface Props {
+  posts: [Post];
+}
+
+function Home({ posts }: Props) {
   return (
     <div className="max-w-7xl mx-auto">
       <Head>
@@ -15,8 +21,24 @@ const Home: NextPage = () => {
       <Header />
 
       <HomeBanner />
+
+      <Posts posts={posts} />
     </div>
   );
+}
+
+export const getServerSideProps = async () => {
+  try {
+    const res = await fetch('http://localhost:3000/api/posts');
+    const { posts } = await res.json();
+    return {
+      props: {
+        posts,
+      },
+    };
+  } catch (e: any) {
+    throw new Error(e.message);
+  }
 };
 
 export default Home;
